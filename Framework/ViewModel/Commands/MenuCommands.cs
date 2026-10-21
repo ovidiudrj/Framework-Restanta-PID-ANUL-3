@@ -519,6 +519,44 @@ namespace Framework.ViewModel.Commands
         #endregion
 
         #region Thresholding
+
+        #region MinErr Threshold
+        private ICommand _minErrThresholdCommand;
+        public ICommand MinErrThresholdCommand
+        {
+            get
+            {
+                if (_minErrThresholdCommand == null)
+                    _minErrThresholdCommand = new RelayCommand(MinErrThreshold);
+                return _minErrThresholdCommand;
+            }
+        }
+
+        private void MinErrThreshold(object parameter)
+        {
+            if (!IsImageLoaded())
+                return;
+
+            ClearProcessedCanvas(parameter);
+
+            byte T = 0;
+
+            if (GrayInitialImage != null)
+            {
+                T = Thresholding.MinErrThreshold(GrayInitialImage);
+                GrayProcessedImage = Tools.Binary(GrayInitialImage, T);
+            }
+            else if (ColorInitialImage != null)
+            {
+                var grayImage = Tools.Convert(ColorInitialImage);
+                T = Thresholding.MinErrThreshold(grayImage);
+                GrayProcessedImage = Tools.Binary(grayImage, T);
+            }
+
+            MessageBox.Show($"Avem T = {T}", "Rezultat");
+        }
+        #endregion
+
         #endregion
 
         #region Filters

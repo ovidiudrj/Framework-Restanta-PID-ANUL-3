@@ -1,5 +1,6 @@
 ﻿using Emgu.CV;
 using Emgu.CV.Structure;
+using System;
 
 namespace Algorithms.Tools
 {
@@ -68,7 +69,7 @@ namespace Algorithms.Tools
             {
                 for (int x = 0; x < inputImage.Width; ++x)
                 {
-                    if (inputImage.Data[y, x, 0] >= threshold)
+                    if (inputImage.Data[y, x, 0] > threshold)
                         result.Data[y, x, 0] = 255;
                 }
             }
