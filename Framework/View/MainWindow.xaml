@@ -167,7 +167,9 @@
 
                 </MenuItem>
                 <MenuItem Header="High-pass">
-
+                    <MenuItem Header="Sobel_RGB"
+                              Command="{Binding Path=MenuCommands.SobelRgbCommand}"
+                              CommandParameter="{Binding ElementName=processedImageCanvas}"/>
                 </MenuItem>
             </MenuItem>
 

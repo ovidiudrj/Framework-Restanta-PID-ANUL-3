@@ -560,6 +560,31 @@ namespace Framework.ViewModel.Commands
         #endregion
 
         #region Filters
+        private ICommand _sobelRgbCommand;
+        public ICommand SobelRgbCommand
+        {
+            get
+            {
+                if (_sobelRgbCommand == null)
+                    _sobelRgbCommand = new RelayCommand(SobelRgb);
+                return _sobelRgbCommand;
+            }
+        }
+
+        private void SobelRgb(object parameter)
+        {
+            if (!IsImageLoaded())
+                return;
+
+            if (ColorInitialImage == null)
+            {
+                MessageBox.Show("Please load a color image first!");
+                return;
+            }
+
+            ClearProcessedCanvas(parameter);
+            ColorProcessedImage = Filters.SobelRGB(ColorInitialImage);
+        }
         #endregion
 
         #region Morphological operations
